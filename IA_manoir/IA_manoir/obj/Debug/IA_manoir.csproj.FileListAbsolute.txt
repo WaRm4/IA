@@ -1,0 +1,14 @@
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\bin\Debug\IA_manoir.exe.config
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\bin\Debug\IA_manoir.exe
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\bin\Debug\IA_manoir.pdb
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.csprojAssemblyReference.cache
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\MainWindow.g.cs
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\App.g.cs
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir_MarkupCompile.cache
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir_MarkupCompile.lref
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\MainWindow.baml
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.g.resources
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.Properties.Resources.resources
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.csproj.GenerateResource.cache
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.exe
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.pdb
