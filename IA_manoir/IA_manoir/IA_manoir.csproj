@@ -69,6 +69,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="modele\Carte.cs" />
+    <Compile Include="modele\Environnement.cs" />
+    <Compile Include="modele\Item.cs" />
+    <Compile Include="modele\Noeud.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -99,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\poussiere.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bijoux.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
