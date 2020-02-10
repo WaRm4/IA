@@ -69,7 +69,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="modele\Agent.cs" />
+    <Compile Include="modele\Capteur.cs" />
     <Compile Include="modele\Carte.cs" />
+    <Compile Include="modele\Effecteur.cs" />
     <Compile Include="modele\Environnement.cs" />
     <Compile Include="modele\Item.cs" />
     <Compile Include="modele\Noeud.cs" />

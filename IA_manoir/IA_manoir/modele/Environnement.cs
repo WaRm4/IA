@@ -2,26 +2,44 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace IA_manoir.modele
 {
     class Environnement
     {
-        private List<Noeud> carte { get; set; }
+        public List<Noeud> Carte { get; set; }
 
-        public Canvas leCanvas { get; private set; }
+        public Canvas LeCanvas { get; private set; }
+
+        public Thread thd1 { get; set; }
+        public bool bcl { get; set; }
+
+        public delegate void AddDirty();
+        public AddDirty myDelegateDirty;
+        public delegate void AddJewels();
+        public AddJewels myDelegateJewels;
+
         public Environnement(int nbCasesH, int nbCasesL, Canvas ca)
         {
             Carte c = new Carte(nbCasesH, nbCasesL);
-            carte = c.carte;
-            leCanvas = ca;
+            Carte = c.Manoir;
+            LeCanvas = ca;
+            bcl = true;
+            thd1 = new Thread(this.Boucle)
+            {
+                Name = "Environnement"
+            };
+            myDelegateDirty = new AddDirty(AjouterPoussière);
+            myDelegateJewels = new AddJewels(AjouterBijoux);
+
         }
 
         private bool NouvelleCaseSale()
         {
             Random r = new Random();
-            if (r.NextDouble() > 0.75)
+            if (r.NextDouble() > 0.50)
                 return true;
             return false;
         }
@@ -29,40 +47,35 @@ namespace IA_manoir.modele
         private void AjouterPoussière()
         {
             Random r = new Random();
-            int i = r.Next(25);
-
-            if ( !carte[i].Contientpoussiere)
+            int i = r.Next(Carte.Count);
+            if (Carte[i].Contientpoussiere || Carte[i].ContientAspi)
             {
-                carte[i].Contientpoussiere = true;
-                Item poussiere = new Item("images/poussiere.png", "poussiere",20,20);
-                Canvas.SetLeft(poussiere.image, 5 + carte[i].x * 60);
-                Canvas.SetTop(poussiere.image, 5 + carte[i].y * 60);
-                leCanvas.Children.Add(poussiere.image);
-                Console.WriteLine("ajout poussiere avec random");
-            }
-            else 
-            {
-                foreach(Noeud n in carte)
+                i = r.Next(Carte.Count);
+                int sauv = i;
+                while (Carte[i].Contientpoussiere || Carte[i].ContientAspi)
                 {
-                    if(!n.Contientpoussiere)
+                    i++;
+                    if (i >= Carte.Count)
                     {
-                        n.Contientpoussiere = true;
-                        Item poussiere = new Item("images/poussiere.png", "poussiere", 20, 20);
-                        Canvas.SetLeft(poussiere.image, 5 + n.x * 60);
-                        Canvas.SetTop(poussiere.image, 5 + n.y * 60);
-                        leCanvas.Children.Add(poussiere.image);
-                        Console.WriteLine("ajout poussiere avec non random");
+                        i = 0;
+                    }
+                    if (i == sauv)
+                    {
                         return;
                     }
-
                 }
             }
+            Carte[i].Contientpoussiere = true;
+            Item poussiere = new Item("images/poussiere.png", "poussiere", 20, 20);
+            MainWindow.PlacerElement(poussiere.Image, 5 + Carte[i].X * 60, 5 + Carte[i].Y * 60);
+            Carte[i].AjoutPoussiere(poussiere);
+            Console.WriteLine("ajout poussiere 111");
         }
 
         private bool NouveauBijoux()
         {
             Random r = new Random();
-            if (r.NextDouble() > 0.9)
+            if (r.NextDouble() > 0.75)
                 return true;
             return false;
         }
@@ -70,58 +83,82 @@ namespace IA_manoir.modele
         private void AjouterBijoux()
         {
             Random r = new Random();
-            int i = r.Next(25);
-
-            if (!carte[i].ContientBijoux)
+            int i = r.Next(Carte.Count);
+            if (Carte[i].ContientBijoux || Carte[i].ContientAspi)
             {
-                carte[i].ContientBijoux = true;
-                Item poussiere = new Item("images/bijoux.png", "bijoux", 20, 20);
-                Canvas.SetLeft(poussiere.image, 40 + carte[i].x * 60);
-                Canvas.SetTop(poussiere.image, 40 + carte[i].y * 60);
-                leCanvas.Children.Add(poussiere.image);
-                Console.WriteLine("ajout poussiere avec random");
-            }
-            else
-            {
-                foreach (Noeud n in carte)
+                i = r.Next(Carte.Count);
+                int sauv = i;
+                while (Carte[i].ContientBijoux || Carte[i].ContientAspi)
                 {
-                    if (!n.ContientBijoux)
+                    i++;
+                    if (i >= Carte.Count)
                     {
-                        n.ContientBijoux = true;
-                        Item poussiere = new Item("images/bijoux.png", "bijoux", 20, 20);
-                        Canvas.SetLeft(poussiere.image, 40 + n.x * 60);
-                        Canvas.SetTop(poussiere.image, 40 + n.y * 60);
-                        leCanvas.Children.Add(poussiere.image);
-                        Console.WriteLine("ajout poussiere avec non random");
+                        i = 0;
+                    }
+                    if (i == sauv)
+                    {
                         return;
                     }
-
                 }
             }
+            Carte[i].ContientBijoux = true;
+            Item bijoux = new Item("images/bijoux.png", "bijoux", 20, 20);
+            MainWindow.PlacerElement(bijoux.Image, 40 + Carte[i].X * 60, 40 + Carte[i].Y * 60);
+            Carte[i].AjoutBijoux(bijoux);
+            Console.WriteLine("ajout bijoux 000");
         }
 
-        public void start ()
+        public void Start()
         {
-            Parallel.Invoke(() => boucle());
+            thd1.Start();
         }
 
-        
-        public void boucle ()
+
+        public void Boucle()
         {
-            int i = 0;
-            while(i<5)
+            Application.Current.Dispatcher.Invoke(this.myDelegateDirty);
+            while (bcl)
             {
-                if(NouvelleCaseSale())
+                if (NouvelleCaseSale())
                 {
-                    AjouterPoussière();
+                    Application.Current.Dispatcher.Invoke(this.myDelegateDirty);
                 }
-                if(NouveauBijoux())
+                if (NouveauBijoux())
                 {
-                    AjouterBijoux();
+                    Application.Current.Dispatcher.Invoke(this.myDelegateJewels);
                 }
-                Thread.Sleep(1000);
+                Console.WriteLine("boucle");
+                Thread.Sleep(3000);
             }
         }
+        public void ArreterBoucle()
+        {
+            Console.WriteLine("fin boucle env");
+            bcl = false;
+        }
 
+        public Noeud rechercheNoeud(int x, int y)
+        {
+            foreach (Noeud n in Carte)
+            {
+                if(n.X==x && n.Y==y)
+                {
+                    return n;
+                }
+            }
+            return null;
+        }
+
+        public Noeud RechercherAgent()
+        {
+            foreach (Noeud n in Carte)
+            {
+                if (n.ContientAspi)
+                {
+                    return n;
+                }
+            }
+            return null;
+        }
     }
 }
