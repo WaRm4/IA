@@ -14,6 +14,7 @@ namespace IA_manoir.modele
         public Item Poussiere { get; set; }
         public Item Bijoux { get; set; }
         public bool Marque { get; set; }
+        public int Heuristique { get; set; }
 
         public Noeud(int y, int x)
         {
@@ -24,6 +25,7 @@ namespace IA_manoir.modele
             Contientpoussiere = false;
             Voisins = new List<Noeud>();
             Marque = false;
+            Heuristique = -1;
         }
 
         public void AjouterVoisin(Noeud n)

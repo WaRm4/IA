@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,22 +9,27 @@ namespace IA_manoir.modele
     class Environnement
     {
         public List<Noeud> Carte { get; set; }
-
         public Canvas LeCanvas { get; private set; }
-
         public Thread thd1 { get; set; }
         public bool bcl { get; set; }
+        public int MesurePerformance { get; set; }
+        private readonly int TpsActualisation;
+        private readonly int PourcentagePoussiere;
+        private readonly int PourcentageBijoux;
 
         public delegate void AddDirty();
         public AddDirty myDelegateDirty;
         public delegate void AddJewels();
         public AddJewels myDelegateJewels;
 
-        public Environnement(int nbCasesH, int nbCasesL, Canvas ca)
+        public Environnement(int nbCasesH, int nbCasesL, int TpsA, int pourcentP, int pourcentB ,Canvas ca)
         {
             Carte c = new Carte(nbCasesH, nbCasesL);
             Carte = c.Manoir;
             LeCanvas = ca;
+            TpsActualisation = TpsA;
+            PourcentageBijoux = pourcentB;
+            PourcentagePoussiere = pourcentP;
             bcl = true;
             thd1 = new Thread(this.Boucle)
             {
@@ -33,13 +37,12 @@ namespace IA_manoir.modele
             };
             myDelegateDirty = new AddDirty(AjouterPoussière);
             myDelegateJewels = new AddJewels(AjouterBijoux);
-
         }
 
         private bool NouvelleCaseSale()
         {
             Random r = new Random();
-            if (r.NextDouble() > 0.50)
+            if (r.NextDouble() * 100 < PourcentagePoussiere)
                 return true;
             return false;
         }
@@ -75,7 +78,7 @@ namespace IA_manoir.modele
         private bool NouveauBijoux()
         {
             Random r = new Random();
-            if (r.NextDouble() > 0.75)
+            if (r.NextDouble() * 100 < PourcentageBijoux)
                 return true;
             return false;
         }
@@ -128,7 +131,7 @@ namespace IA_manoir.modele
                     Application.Current.Dispatcher.Invoke(this.myDelegateJewels);
                 }
                 Console.WriteLine("boucle");
-                Thread.Sleep(3000);
+                Thread.Sleep(TpsActualisation);
             }
         }
         public void ArreterBoucle()

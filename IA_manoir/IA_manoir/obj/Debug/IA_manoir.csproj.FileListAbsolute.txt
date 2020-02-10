@@ -12,3 +12,7 @@ C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.Properties.Res
 C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.csproj.GenerateResource.cache
 C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.exe
 C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.pdb
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\bin\Debug\IA_manoir.exe.manifest
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\bin\Debug\IA_manoir.application
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.exe.manifest
+C:\Users\killi\Desktop\IA\IA_manoir\IA_manoir\obj\Debug\IA_manoir.application
