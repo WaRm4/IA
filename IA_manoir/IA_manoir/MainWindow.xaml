@@ -1,0 +1,95 @@
+﻿<Window x:Class="IA_manoir.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Closed="Window_Closed"
+        Title="IA Manoir" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Voici le manoir : " FontSize="20" FontFamily="Snap ITC" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" 
+                   HorizontalAlignment="Center" Visibility="Hidden" x:Name="Manoir"/>
+
+        <Canvas x:Name="Lecanvas" Grid.Row="1" Grid.Column="1" Height="300" Width="300" HorizontalAlignment="Center" 
+                Visibility="Hidden" VerticalAlignment="Center">
+
+            <Line X1="0" X2="0" Y1="0" Y2="300" Fill="Black" Stroke="Black" />
+            <Line X1="60" X2="60" Y1="0" Y2="300" Fill="Black" Stroke="Black" />
+            <Line X1="120" X2="120" Y1="0" Y2="300" Fill="Black" Stroke="Black" />
+            <Line X1="180" X2="180" Y1="0" Y2="300" Fill="Black" Stroke="Black" />
+            <Line X1="240" X2="240" Y1="0" Y2="300" Fill="Black" Stroke="Black" />
+            <Line X1="300" X2="300" Y1="0" Y2="300" Fill="Black" Stroke="Black" />
+
+            <Line X1="0" X2="300" Y1="0" Y2="0" Fill="Black" Stroke="Red" />
+            <Line X1="0" X2="300" Y1="60" Y2="60" Fill="Black" Stroke="Red" />
+            <Line X1="0" X2="300" Y1="120" Y2="120" Fill="Black" Stroke="Red" />
+            <Line X1="0" X2="300" Y1="180" Y2="180" Fill="Black" Stroke="Red" />
+            <Line X1="0" X2="300" Y1="240" Y2="240" Fill="Black" Stroke="Red" />
+            <Line X1="0" X2="300" Y1="300" Y2="300" Fill="Black" Stroke="Red" />
+
+        </Canvas>
+
+        <StackPanel x:Name="Stats" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Visibility="Hidden">
+            <StackPanel>
+                <TextBlock Text="Energie max : " HorizontalAlignment="Right" FontSize="14"/>
+                <TextBlock Text="Energie dépensée : " HorizontalAlignment="Right" FontSize="14"/>
+                <TextBlock Text="Bijoux ramassés : " HorizontalAlignment="Right" FontSize="14"/>
+                <TextBlock Text="Bijoux aspirés : " HorizontalAlignment="Right" FontSize="14"/>
+                <TextBlock Text="Poussières aspirées : " HorizontalAlignment="Right" FontSize="14"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="{Binding ElementName=EnergieMax, Path=Text}" FontSize="14" FontWeight="Bold"/>
+                <TextBlock x:Name="EnergieDepensee" FontSize="14" FontWeight="Bold" Foreground="#FF004DD0" />
+                <TextBlock x:Name="BijouxRamasses" FontSize="14" FontWeight="Bold" Foreground="#FF0DC80D" />
+                <TextBlock x:Name="BijouxAspires" FontSize="14" FontWeight="Bold" Foreground="#FFCE002C"/>
+                <TextBlock x:Name="PoussieresAspirees" FontSize="14" FontWeight="Bold" Foreground="#FF0DC80D"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel x:Name="BoutonsS" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden">
+            <Button Click="Start" Content="Start" Margin="20" FontSize="16" FontWeight="Bold"/>
+            <Button Click="Stop" x:Name="boutonStop"  Content="Stop" Margin="20" FontSize="16" FontWeight="Bold"/>
+        </StackPanel>
+
+        <TextBlock x:Name="textDeFin" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                   Visibility="Hidden" FontSize="16" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center"/>
+
+        <TextBlock Visibility="{Binding ElementName=Debut, Path=Visibility}" Text="Veuillez saisir les paramètres : " FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+        <StackPanel x:Name="Debut" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+            <StackPanel>
+                <TextBlock Text="Energie max : " HorizontalAlignment="Right" FontSize="15" />
+                <TextBlock Text="Energie dépensée par action : " HorizontalAlignment="Right" FontSize="15"/>
+                <TextBlock Text="Temps par action (en millisecondes) : " HorizontalAlignment="Right" FontSize="15"/>
+                <TextBlock Text="Temps actualisation environnement (en millisecondes) : " HorizontalAlignment="Right" FontSize="15"/>
+                <TextBlock Text="Pourcentage de spawn de poussiere (en %) : " HorizontalAlignment="Right" FontSize="15"/>
+                <TextBlock Text="Pourcentage de spawn de bijoux (en %) : " HorizontalAlignment="Right" FontSize="15"/>
+                <TextBlock Text="Parcours informé ? : " HorizontalAlignment="Right" FontSize="15"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBox Text="20" x:Name="EnergieMax" FontSize="14" FontWeight="Bold" />
+                <TextBox Text="1" x:Name="EnergiePAct" FontSize="14" FontWeight="Bold"/>
+                <TextBox Text="500" x:Name="TpsAction" FontSize="14" FontWeight="Bold"/>
+                <TextBox Text="1000" x:Name="TpsActualisation" FontSize="14" FontWeight="Bold"/>
+                <TextBox Text="75" x:Name="pourcenP" FontSize="14" FontWeight="Bold"/>
+                <TextBox Text="20" x:Name="pourcenB" FontSize="14" FontWeight="Bold"/>
+                <CheckBox Content="Oui" FontSize="14" FontWeight="Bold" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                <Button Content="Go!" Margin="0,20,0,0" Click="Go" FontSize="14" FontWeight="Bold" MinHeight="30" MinWidth="30"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>
