@@ -27,6 +27,7 @@ namespace IA_manoir.modele
 
         /// <summary>
         /// Mesure de performance que l'agent pourra consulter.
+        /// De base est à 100, qui est une bonne performance et est decrementee a chaque erreur.
         /// </summary>
         public int MesurePerformance { get; set; }
 
@@ -67,6 +68,7 @@ namespace IA_manoir.modele
             TpsActualisation = TpsA;
             PourcentageBijoux = pourcentB;
             PourcentagePoussiere = pourcentP;
+            MesurePerformance = 100;
             Boucler = true;
             Thd = new Thread(this.Boucle)
             {

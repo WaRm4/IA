@@ -264,6 +264,15 @@ namespace IA_manoir.modele
                     this.Stop();
                 }
                 Queue<String> actions = ListeActions(arrivee, environnement);
+                if(MonCapteur.RenvoyerMesurePerformance() <= 50) //Une mesure de performance a 50 sera consideree comme mauvaise.
+                {
+                    Queue<String> act2 = new Queue<string>();
+                    for (int i = 0; i < actions.Count / 2 ; i++)// On reduit donc de moitie le nombre d'actions,  
+                    {                                           // pour que l'agent puisse actualiser ses actions plus souvent.
+                        act2.Enqueue(actions.Dequeue());
+                    }
+                    actions = act2;
+                }
                 if (actions.Count > EnergieMax - EnergieDepensee)
                 {
                     Queue<String> act2 = new Queue<string>();
