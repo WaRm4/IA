@@ -8,19 +8,19 @@ Petite intelligence artificielle en c# .Net qui consiste a modéliser les dépla
 
 ---
 
--On considère qu'une poussière et un bijou ne peuvent pas apparaître sur l’aspirateur (au même endroit où se trouve l’aspirateur).
++ On considère qu'une poussière et un bijou ne peuvent pas apparaître sur l’aspirateur (au même endroit où se trouve l’aspirateur).
 
--Pour implémenter le fait que l’environnement et l’agent fonctionnent sur 2 fils d’exécution différents nous avons utilisé les Threads, cependant il s’agit de la première fois que nous les utilisons concrètement, nous n’avons donc peut-être pas utilisé la méthode la plus optimale.
++ Pour implémenter le fait que l’environnement et l’agent fonctionnent sur 2 fils d’exécution différents nous avons utilisé les Threads, cependant il s’agit de la première fois que nous les utilisons concrètement, nous n’avons donc peut-être pas utilisé la méthode la plus optimale.
 
--Nous avons documenté notre code pour avoir plus de détails sur les fonctions créées et aider à la compréhension.
++ Nous avons documenté notre code pour avoir plus de détails sur les fonctions créées et aider à la compréhension.
 
--Au début de l’application, différents paramètres sont à saisir pour voir comment évolue l’agent dans différentes conditions.
++ Au début de l’application, différents paramètres sont à saisir pour voir comment évolue l’agent dans différentes conditions.
 
--La fin de la simulation peut être provoquée par un bouton stop, par un manque d’énergie de l’agent ou bien quand l’environnement se retrouve dans un état entièrement propre.
++ La fin de la simulation peut être provoquée par un bouton stop, par un manque d’énergie de l’agent ou bien quand l’environnement se retrouve dans un état entièrement propre.
 
--Concernant l’exploration, la greedy search n’est pas totalement fonctionnelle.
++ Concernant l’exploration, la greedy search n’est pas totalement fonctionnelle.
 
--Nous n’avons pas pu implémenter la fréquence d’exploration.
++ Nous n’avons pas pu implémenter la fréquence d’exploration.
 
 
 ## Propriétés de l’environnement
