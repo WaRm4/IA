@@ -1,9 +1,12 @@
 # IA_UQAC_2020
--------------------------------------------------------------------------------------------
+
+---
+
 Petite intelligence artificielle en c# .Net qui consiste a modéliser les déplacement d'un aspirateur dans un manoir sale. L'environnement et l'aspirateur (IA) sont sur 2 fils d'exécution différents.
 
-## Specifications :
--------------------------------------------------------------------------------------------
+## Specifications
+
+---
 
 -On considère qu'une poussière et un bijou ne peuvent pas apparaître sur l’aspirateur (au même endroit où se trouve l’aspirateur).
 
@@ -20,8 +23,9 @@ Petite intelligence artificielle en c# .Net qui consiste a modéliser les dépla
 -Nous n’avons pas pu implémenter la fréquence d’exploration.
 
 
-# Propriétés de l’environnement :
--------------------------------------------------------------------------------------------
+## Propriétés de l’environnement
+
+---
 
 -Complètement observable : l’aspirateur connaît en tout temps son environnement et ou sont les poussières et les bijoux.
 -Stochastique : il y a un certain pourcentage de chance qu'une poussière ou un bijou apparaisse à un endroit aléatoire pendant que l’aspirateur se déplace
@@ -36,8 +40,9 @@ Pour l’environnement, on a une classe environnement qui contient une carte (qu
 Une carte est représentée par une liste de noeuds et ce sont les noeuds qui détiennent les poussières et les bijoux.
 
 
-# Propriétés de l’agent :
--------------------------------------------------------------------------------------------
+## Propriétés de l’agent
+
+---
 
 -Autonome: notre agent n’a besoin d’aucune aide pour fonctionner. Il perçoit l’environnement grâce à ses capteurs et agit grâce à ses effecteurs donc il n’y a aucune aide extérieure.
 -Habileté sociale : pour le moment il n’en a pas mais à l’avenir il pourra discuter avec par exemple une maison connectée, voir même reconnaître les ordres donnés par un humain…
@@ -50,8 +55,9 @@ Notre agent est un agent basé sur les buts. Il choisit ses actions en fonction 
 Notre classe agent est donc composée d’une classe capteur (qui lui donne les informations sur l’environnement), d’une classe effecteur (qui lui permet de faire les différentes actions possibles), et de toutes ses variables pour avoir ses statistiques.
 
 
-# Monde de l’agent Aspirateur :
--------------------------------------------------------------------------------------------
+## Monde de l’agent Aspirateur
+
+---
 
 + Mesure de performance : nombre de bijoux aspirés.
 + Environnement : manoir.
@@ -59,9 +65,10 @@ Notre classe agent est donc composée d’une classe capteur (qui lui donne les 
 + Capteurs : caméras, sonar, odomètre, indicateur de vitesse, capteurs du moteur, etc.
 
 
-# État mental BDI :
--------------------------------------------------------------------------------------------
+## État mental BDI
 
-	-Belief: l’agent perçoit l’environnement grâce à ces capteurs et il possède aussi d’autres connaissances comme par exemple l'énergie qu’il dépense par action, l’energie maximum …
-	-Desire: grâce à la fonction d'exploration il connaît la case la plus proche où il y a de la poussière à un instant T.
-	-Intention: il définit une liste d’actions à accomplir pour atteindre le but recherché; exemple: (droite, droite, aspirer).
+---
+
+-Belief: l’agent perçoit l’environnement grâce à ces capteurs et il possède aussi d’autres connaissances comme par exemple l'énergie qu’il dépense par action, l’energie maximum …
+-Desire: grâce à la fonction d'exploration il connaît la case la plus proche où il y a de la poussière à un instant T.
+-Intention: il définit une liste d’actions à accomplir pour atteindre le but recherché; exemple: (droite, droite, aspirer).
